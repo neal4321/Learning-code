@@ -1,0 +1,23 @@
+from replit import clear
+from art import logo
+
+bids = {}
+last_bid = False
+high_bidder = ""
+high_bid = 0
+
+while last_bid == False:
+  print(logo)
+  name = str(input("What is your name? "))
+  bid = int(input("What's your bid? £"))
+  bids[name] = bid
+  next = input("Is there another bidder? Y or N\n").lower()
+  if next == "n":
+    last_bid = True
+  clear()
+for bidder in bids:
+  if bids[bidder] > high_bid:
+    high_bidder = bidder
+    high_bid = bids[bidder]
+print(logo)
+print(f"The winner is {high_bidder} with a bid of £{high_bid}.")
