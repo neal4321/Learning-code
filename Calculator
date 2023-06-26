@@ -1,0 +1,35 @@
+from art import logo
+from replit import clear
+def add(a, b):
+  return a + b
+
+def sub(a, b):
+  return a - b
+
+def mult(a, b):
+  return a * b
+
+def div(a, b):
+  return a/b
+
+operations = {"+":add, "-":sub, "x":mult, "/":div}
+def calculator():
+  finish = False
+  clear()
+  print(logo)
+  num1 = float(input("What is the first number? "))
+  while not finish:
+    func = input("What function do you want to do?\n+\n-\nx\n/\n")
+    num2 = float(input("What is the second number? "))
+    ans = 0
+    if func in operations:
+      ans = operations[func](num1, num2)
+      print(f"{num1} {func} {num2} = {ans}")
+    else:
+      print("Please enter a valid function")
+    if input("Do you want continue with the same number? Y or N ").lower() == "y":
+      num1 = ans
+    else:
+      finish = True
+      calculator()
+calculator()
