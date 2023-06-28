@@ -1,0 +1,101 @@
+import random
+from replit import clear
+from art import logo
+
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+def play_game():
+  if input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == "y":
+      game()
+def game():
+  dealer = []
+  player = []
+  game_over = False
+  dealer.append(int(cards[random.randint(0,12)]))
+  player.append(int(cards[random.randint(0,12)]))
+  dealer.append(int(cards[random.randint(0,12)]))
+  player.append(int(cards[random.randint(0,12)]))
+  if sum(player) > 21:
+    if 11 in player:
+      for i in range(len(player)):
+        if player[i] == 11:
+          player[i] = 1
+          break
+  if sum(player) == 21 or sum(dealer) == 21:
+      if sum(player) == 21:
+        if sum(dealer) == 21:
+          clear()
+          print(logo)
+          print(f"Your cards: {player}")
+          print(f"Computer's cards: {dealer}")
+          print("Drawer. Player and Computer have Blackjack")
+          play_game()
+        else:
+          clear()
+          print(logo)
+          print(f"Your cards: {player}")
+          print(f"Computer's cards: {dealer}")
+          print("Blackjack. You win!")
+          play_game()
+      else:
+        clear()
+        print(logo)
+        print(f"Your cards: {player}")
+        print(f"Computer's cards: {dealer}")
+        print("Blackjack. Computer wins!")
+        play_game()
+
+  while game_over == False:
+    clear()
+    print(logo)
+          
+    print(f"Your cards: {player}, current score: {sum(player)}")
+    print(f"Computer's first card: {dealer[0]}")
+    add_card = input("Type 'y' to get another card, type 'n' to pass: ").lower()
+    if add_card == "y":
+      player.append(int(cards[random.randint(0,12)]))
+    else:
+      while sum(dealer) < 18:
+        dealer.append(int(cards[random.randint(0,12)]))
+        if sum(dealer) > 21:
+          for a in range(len(dealer)):
+            if dealer[a] == 11:
+              dealer[a] = 1
+      if sum(dealer) > 21:
+        print(f"Your cards: {player}, current score: {sum(player)}")
+        print(f"Computer's cards: {dealer}, final score: {sum(dealer)}")
+        print("Computer went over. You win!")
+        game_over = True
+      elif sum(dealer) < sum(player):
+        print(f"Your cards: {player}, current score: {sum(player)}")
+        print(f"Computer's cards: {dealer}, final score: {sum(dealer)}")
+        print("You win!")
+        game_over = True
+      elif sum(dealer) == sum(player):
+        print(f"Your cards: {player}, current score: {sum(player)}")
+        print(f"Computer's cards: {dealer}, final score: {sum(dealer)}")
+        print("Draw!")
+        game_over = True
+      else:
+        print(f"Your cards: {player}, current score: {sum(player)}")
+        print(f"Computer's cards: {dealer}, final score: {sum(dealer)}")
+        print("You Lose!")
+        game_over = True
+          
+    if sum(player) > 21:
+      if 11 in player:
+        print("11 found")
+        for i in range(len(player)):
+          if player[i] == 11:
+            print("11 change")
+            player[i] = 1
+            print(player[i])
+            break
+      else:
+        print(f"Your cards: {player}, current score: {sum(player)}")
+        print(f"Computer's cards: {dealer}, final score: {sum(dealer)}")
+        print("Your went over. You lose!")
+        game_over = True
+    if game_over == True:
+      play_game()
+play_game()
