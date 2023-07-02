@@ -1,0 +1,47 @@
+from art import logo
+from art import vs
+from game_data import data
+from random import randint
+from replit import clear
+
+
+def check_ans(person_a, person_b, answer):
+  """Checks the accounts that have been picked and confirms if the user guess is correct"""
+  if int(person_a) > int(person_b):
+    return answer == "a"
+  else:
+    return answer == "b"
+
+def game():
+  score = 0
+  failed = False
+  person_a_int = randint(0,len(data)-1)
+  while failed == False:
+    person_b_int = randint(0,len(data)-1)
+    if person_a_int == person_b_int:
+      continue
+    person_a_name = data[person_a_int]["name"]
+    person_b_name = data[person_b_int]["name"]
+    person_a_description = data[person_a_int]["description"]
+    person_b_description = data[person_b_int]["description"]
+    person_a_country = data[person_a_int]["country"]
+    person_b_country = data[person_b_int]["country"]
+    person_a_followers = int(data[person_a_int]["follower_count"])
+    person_b_followers = int(data[person_b_int]["follower_count"])
+    
+    print(logo)
+    if score > 0:
+      print(f"You're right! Current score: {score}")
+    print(f"Compare A: {person_a_name}, a {person_a_description}, from {person_a_country}.")
+    print(vs)
+    print(f"Against B: {person_b_name}, a {person_b_description}, from {person_b_country}.")
+    print(f"A: {person_a_followers}, B: {person_b_followers}")
+    if check_ans(person_a_followers, person_b_followers, input("Who has more followers? Type 'A' or 'B': ").lower()):
+      score += 1
+      person_a_int = person_b_int
+      clear()
+    else:
+      print(f"Sorry, that's wrong. Final score: {score}")
+      failed = True
+
+game()
