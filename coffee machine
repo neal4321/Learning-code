@@ -37,7 +37,7 @@ acceptable_requests = ["espresso", "latte", "cappuccino", "report", "off"]
 def report():
     for resource in resources:
         print(f"{resource.title()}: {resources[resource]}")
-    print(f"${stock_cash:.2f}")
+    print(f"Money: ${stock_cash:.2f}")
 
 
 def total_coins(pennies, nickles, dimes, quarters):
