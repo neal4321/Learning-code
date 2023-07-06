@@ -32,7 +32,7 @@ resources = {
 
 stock_cash = 0
 
-acceptable_requests = ["espresso", "latte", "cappuccino", "report"]
+acceptable_requests = ["espresso", "latte", "cappuccino", "report", "off"]
 
 def report():
     print(resources)
@@ -75,10 +75,12 @@ def take_money(coffee_type):
 
 def run_machine():
     while resources["water"] > 0 and resources["milk"] > 0 and resources["coffee"] > 0:
-        request = input("What would you like? (espresso/latte/cappuccino): ")
+        request = input("What would you like? (espresso/latte/cappuccino): ").lower()
         if not request in acceptable_requests:
             print("Please enter an acceptable request.")
             continue
+        if request == "off":
+            break
         if request == "report":
             report()
             continue
