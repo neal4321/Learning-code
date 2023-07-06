@@ -35,7 +35,8 @@ stock_cash = 0
 acceptable_requests = ["espresso", "latte", "cappuccino", "report", "off"]
 
 def report():
-    print(resources)
+    for resource in resources:
+        print(f"{resource.title()}: {resources[resource]}")
     print(f"${stock_cash:.2f}")
 
 
